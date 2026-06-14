@@ -279,27 +279,32 @@ function initContactForm() {
         submitBtn.disabled = true;
         submitBtn.innerText = "Sending...";
 
-        emailjs.sendForm("service_u0uki69", "template_ohczo0g", contactForm)
-            .then(() => {
-                submitBtn.innerText = originalText;
-                submitBtn.disabled = false;
-                if (formStatus) {
-                    formStatus.innerText = "Message sent! Redirecting to WhatsApp...";
-                    formStatus.className = "form-status success";
-                }
-                const data = new FormData(contactForm);
-                const whatsappMessage = `Hey GK\n\nJust submitted the enquiry form from your website.\n\nName: ${data.get("name")}\nPhone: ${data.get("phone")}\n\nMessage:\n${data.get("message")}`;
-                const whatsappUrl = `https://wa.me/917829784837?text=${encodeURIComponent(whatsappMessage)}`;
-                contactForm.reset();
-                setTimeout(() => window.open(whatsappUrl, "_blank"), 1500);
-            }, (err) => {
-                submitBtn.innerText = originalText;
-                submitBtn.disabled = false;
-                if (formStatus) {
-                    formStatus.innerText = "Failed. Try again later.";
-                    formStatus.className = "form-status error";
-                }
-            });
+        const formData = new FormData(contactForm);
+
+        fetch("/", {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: new URLSearchParams(formData).toString()
+        })
+        .then(() => {
+            submitBtn.innerText = originalText;
+            submitBtn.disabled = false;
+            if (formStatus) {
+                formStatus.innerText = "Message sent! Redirecting to WhatsApp...";
+                formStatus.className = "form-status success";
+            }
+            const whatsappMessage = `Hey GK\n\nJust submitted the enquiry form from your website.\n\nName: ${formData.get("name")}\nPhone: ${formData.get("phone")}\n\nMessage:\n${formData.get("message")}`;
+            const whatsappUrl = `https://wa.me/917829784837?text=${encodeURIComponent(whatsappMessage)}`;
+            contactForm.reset();
+            setTimeout(() => window.open(whatsappUrl, "_blank"), 1500);
+        }).catch((err) => {
+            submitBtn.innerText = originalText;
+            submitBtn.disabled = false;
+            if (formStatus) {
+                formStatus.innerText = "Failed. Try again later.";
+                formStatus.className = "form-status error";
+            }
+        });
     });
 }
 
