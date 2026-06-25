@@ -1,5 +1,5 @@
 /**
- * GK Photos & Video - Dynamic Frontend Logic
+ * GOKUSH PHOTOGRAPHY - Dynamic Frontend Logic
  * Refactored for JSON-driven content rendering.
  */
 
@@ -38,8 +38,8 @@ document.addEventListener("DOMContentLoaded", async () => {
  */
 async function fetchData() {
     const [portRes, testRes] = await Promise.all([
-        fetch('/static/data/portfolio.json'),
-        fetch('/static/data/testimonials.json')
+        fetch('/static/data/portfolio.json?v=' + Date.now()),
+        fetch('/static/data/testimonials.json?v=' + Date.now())
     ]);
 
     state.portfolio = await portRes.json();
@@ -293,7 +293,7 @@ function initContactForm() {
                 formStatus.innerText = "Message sent! Redirecting to WhatsApp...";
                 formStatus.className = "form-status success";
             }
-            const whatsappMessage = `Hey GK\n\nJust submitted the enquiry form from your website.\n\nName: ${formData.get("name")}\nPhone: ${formData.get("phone")}\n\nMessage:\n${formData.get("message")}`;
+            const whatsappMessage = `Hey GOKUSH PHOTOGRAPHY\n\nJust submitted the enquiry form from your website.\n\nName: ${formData.get("name")}\nPhone: ${formData.get("phone")}\n\nMessage:\n${formData.get("message")}`;
             const whatsappUrl = `https://wa.me/917829784837?text=${encodeURIComponent(whatsappMessage)}`;
             contactForm.reset();
             setTimeout(() => window.open(whatsappUrl, "_blank"), 1500);

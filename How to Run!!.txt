@@ -1,0 +1,30 @@
+Awesome! Since the site has been updated to be a fast, purely static website (HTML, CSS, JS) with data loaded via JSON, you no longer need any complex backend frameworks.
+
+Here are the simplest steps to start and test this project on your local machine:
+
+Option 1: Using Python (Recommended since it's already installed)
+Open your terminal (or command prompt).
+Navigate to your project folder:
+bash
+cd c:\Users\bhara\OneDrive\Documents\gk_photosandvideo-main
+Run the built-in Python web server:
+bash
+python -m http.server 5000
+Open your web browser and go to: http://localhost:5000
+Option 2: Using VS Code "Live Server" (Best for development)
+If you use Visual Studio Code to edit your code, this is the easiest method:
+
+Open VS Code and go to the Extensions tab (Ctrl + Shift + X).
+Search for and install the extension called "Live Server" (by Ritwick Dey).
+Open the index.html file in VS Code.
+Click the "Go Live" button that appears in the bottom right corner of the VS Code window, or right-click anywhere in the index.html code and select "Open with Live Server".
+It will automatically open your browser and auto-refresh whenever you save changes!
+Option 3: Using Node.js
+If you have Node.js installed, you can use npx serve:
+
+Open your terminal in the project folder.
+Run this command:
+bash
+npx serve .
+It will give you a localhost link to click on.
+Whenever you want to update the portfolio albums or testimonials in the future, you just need to edit the static/data/portfolio.json or static/data/testimonials.json files and the website will update dynamically!
