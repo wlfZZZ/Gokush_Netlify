@@ -5,3 +5,4 @@ instance/
 venv/
 .env.local
 .venv/
+.DS_Store
